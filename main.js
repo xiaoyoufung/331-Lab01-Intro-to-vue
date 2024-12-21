@@ -12,11 +12,25 @@ createApp({
 
     const details = ref(["50% cotton", "30% wool", "20% polyester"]);
     const variants = ref([
-      { id: 2234, color: "green" },
-      { id: 2235, color: "blue" },
+      { id: 2234, color: "green", image: "./assets/images/socks_green.jpg" },
+      { id: 2235, color: "blue", image: "./assets/images/socks_blue.jpg" },
     ]);
     const sizes = ref(["S", "M", "L"]);
 
+    // 6
+    const cart = ref(0);
+    function addToCart() {
+      cart.value += 1;
+    }
+    function updateImage(variantImage) {
+      image.value = variantImage;
+    }
+    // 6.7
+    function toggleStock() {
+        inStock.value = !inStock.value;
+        inventory.value = inStock.value ? 100 : 0;
+    }
+    
     return {
       product,
       description,
@@ -27,7 +41,11 @@ createApp({
       onSale, // 4.9
       details,
       variants,
-      sizes
+      sizes,
+      cart,
+      addToCart,
+      updateImage,
+      toggleStock, // 6.7
     };
   },
 }).mount("#app");
