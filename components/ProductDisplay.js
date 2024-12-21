@@ -1,7 +1,4 @@
 const productDisplay = {
-    components:{
-        'product-details': productDetails
-    },
     template: 
     `
         <div class="product-display">
@@ -46,6 +43,10 @@ const productDisplay = {
 
                 <!-- 10.6 -->
                 <button class="button" @click="removeFromCart">Remove Cart</button>
+
+                 <!-- 11 -->
+                <review-list v-if="reviews.length" :reviews="reviews"></review-list>
+                <review-form @review-submitted="addReview"></review-form>
     
             </div>
         </div>
@@ -100,6 +101,12 @@ const productDisplay = {
         function removeFromCart() {
             emit("remove-from-cart", variants.value[selectedVariant.value].id);
         }
+
+        // 11.5
+        const reviews = ref([]);
+        function addReview(review) {
+            reviews.value.push(review);
+        }
         
         return {
           title,
@@ -118,7 +125,9 @@ const productDisplay = {
           toggleStock, // 6.7
           updateVariant, // 8
           shipping, // 9
-          removeFromCart // 10.6
+          removeFromCart, // 10.6
+            reviews,
+          addReview, // 11
         };
       }
 };
