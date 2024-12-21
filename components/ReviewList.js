@@ -19,7 +19,8 @@ const reviewList = {
         }
     },
     setup(props) {
-        const reviews = props.reviews;
+        // 12.3
+        const { reviews } = toRefs(props);
         return {
             reviews
         };

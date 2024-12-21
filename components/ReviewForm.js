@@ -3,13 +3,13 @@ const reviewForm = {
     <form class="review-form" @submit.prevent="onSubmit">
         <h3>Leave a review</h3>
         <label for="name">Name:</label>
-        <input id="name" v-model="form.name">
+        <input id="name" v-model="name">
 
         <label for="review">Review:</label>
-        <textarea id="review" v-model="form.review"></textarea>
+        <textarea id="review" v-model="review"></textarea>
 
         <label for="rating">Rating:</label>
-        <select id="rating" v-model.number="form.rating">
+        <select id="rating" v-model.number="rating">
             <option>5</option>
             <option>4</option>
             <option>3</option>
@@ -21,10 +21,10 @@ const reviewForm = {
         <label for="recommend">Would you recommend this product?</label>
 
         <label for="yes">Yes</label>
-        <input type="radio" id="yes" v-model="form.recommend" value="yes">
+        <input type="radio" id="yes" v-model="recommend" value="yes">
        
         <label for="no">No</label>
-        <input type="radio" id="no" v-model="form.recommend" value="no">
+        <input type="radio" id="no" v-model="recommend" value="no">
        
 
         <input class="button" type="submit" value="Submit">
@@ -58,7 +58,7 @@ const reviewForm = {
         }
 
         return {
-            form,
+            ...toRefs(form),
             onSubmit
         }
     }
