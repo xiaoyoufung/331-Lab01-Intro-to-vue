@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Intro SE331</title>
     <!-- Import Styles -->
     <link rel="stylesheet" href="./assets/styles.css" />
     <!-- Import Vue.js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="app">
-        <div class="nav-bar"></div>
-        <div class="cart">Cart({{cart}})</div>
-        <product-display :premium="premium"></product-display>
-        <product-display></product-display>
+      <div class="nav-bar"></div>
+      <!-- 10.5 -->
+      <div class="cart">
+        Cart({{cart.length}})
+        <div v-for="(count, id) in cartCounts" :key="id">
+          Product {{ id }}: {{ count }}
+        </div>
+      </div>
+      <product-display
+        :premium="premium"
+        @add-to-cart="updateCart"
+        @remove-from-cart="removeFromCart"
+      ></product-display>
+      <product-display
+        :premium="premium"
+        @add-to-cart="updateCart"
+        @remove-from-cart="removeFromCart"
+      ></product-display>
     </div>
 
     <!-- Import Js -->
-     <script src="./components/ProductDetails.js"></script>
-     <script src="./components/ProductDisplay.js"></script>
+    <script src="./components/ProductDetails.js"></script>
+    <script src="./components/ProductDisplay.js"></script>
     <script src="./main.js"></script>
-</body>
-
+  </body>
 </html>

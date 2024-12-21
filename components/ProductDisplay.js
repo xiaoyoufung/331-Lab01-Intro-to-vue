@@ -43,6 +43,9 @@ const productDisplay = {
                  :class="{disabledButton: !inStock}">Add To Cart</button>
                  <!-- 6.7 -->
                 <button class="button" @click="toggleStock">Toggle Stock</button>
+
+                <!-- 10.6 -->
+                <button class="button" @click="removeFromCart">Remove Cart</button>
     
             </div>
         </div>
@@ -50,7 +53,7 @@ const productDisplay = {
     props: {
         premium: Boolean
     },
-    setup(props) {
+    setup(props, {emit}) {
         const shipping = computed(() => props.premium ? "Free" : 30);
 
         const product = ref("Boots");
@@ -67,7 +70,7 @@ const productDisplay = {
         const details = ref(["50% cotton", "30% wool", "20% polyester"]);
         const variants = ref([
           { id: 2234, color: "green", image: "./assets/images/socks_green.jpg", quantity: 50 },
-          { id: 2235, color: "blue", image: "./assets/images/socks_blue.jpg", quantity: 0 },
+          { id: 2235, color: "blue", image: "./assets/images/socks_blue.jpg", quantity: 10 },
         ]);
         const selectedVariant = ref(0);
     
@@ -76,7 +79,7 @@ const productDisplay = {
         // 6
         const cart = ref(0);
         function addToCart() {
-          cart.value += 1;
+          emit("add-to-cart", variants.value[selectedVariant.value].id);
         }
         function updateImage(variantImage) {
           image.value = variantImage;
@@ -92,6 +95,10 @@ const productDisplay = {
     
         function updateVariant(index) {
           selectedVariant.value = index;
+        }
+
+        function removeFromCart() {
+            emit("remove-from-cart", variants.value[selectedVariant.value].id);
         }
         
         return {
@@ -110,7 +117,8 @@ const productDisplay = {
           updateImage,
           toggleStock, // 6.7
           updateVariant, // 8
-          shipping // 9
+          shipping, // 9
+          removeFromCart // 10.6
         };
       }
 };
