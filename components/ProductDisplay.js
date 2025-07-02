@@ -63,8 +63,11 @@ const productDisplay = {
         const link = ref("http://www.camt.cmu.ac.th");
         // 8.3
         const image = computed(() => variants.value[selectedVariant.value].image);
-        const inStock = computed(() => variants.value[selectedVariant.value].quantity);
+        // const inStock = computed(() => {
+        //  return variants.value[selectedVariant.value].quantity;
+        // });
         //
+        const inStock = ref(true); // 6.7
         const inventory = ref(100);
         const onSale = ref(true); // 4.9
     
@@ -88,7 +91,6 @@ const productDisplay = {
         // 6.7
         function toggleStock() {
             inStock.value = !inStock.value;
-            inventory.value = inStock.value ? 100 : 0;
         }
     
         // 8
